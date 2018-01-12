@@ -1,23 +1,25 @@
+import pandas as pd
 import numpy as np
 import math
-from shutil import copyfile
-import csv
-import os
 
-input = sys.argv[0]
-output = sys.argv[0].replace(".csv","_noise5.csv")
-num_cols = 0
-num_lines = -1
-with open(input, 'r') as f:
-    for line in f:
-        if num_lines == -1:
-            num_cols = len(line.split(sep=','))
-        num_lines += 1
-if os.path.isfile(output): os.remove(output)
-copyfile(input, output)
-with open(output, 'a') as f:
-    writer = csv.writer(f, delimiter=",")
-    for i in range(1, math.floor(num_lines*.05)):
-        row = np.random.randint(0,9,size=(num_cols))
-        writer.writerow(row)
-print("Done.")
+noise_perc = 5
+noise_range = [-100, 100]
+input = "pendigits_full_with_head.csv"
+output = input.replace(".csv", "_noise" + str(noise_perc) + ".csv")
+
+# Find input csv shape
+txt = pd.read_csv(input, sep=',', iterator=True, chunksize=10000)
+data = pd.concat(txt, ignore_index=True)
+[num_rows, num_cols] = data.shape
+
+# Add noise points to random position
+noise_count = math.floor(num_rows * noise_perc / 100)
+noise = np.random.uniform(low=noise_range[0], high=noise_range[1], size=(noise_count, num_cols))
+df = pd.DataFrame(data=noise, columns=data.columns)
+data = data.append(df)
+data = data.sample(frac=1)
+
+# Write to file
+data.to_csv(output, sep=',', index=False)
+
+print("Done!")
