@@ -1,10 +1,11 @@
 import pandas as pd
 import numpy as np
 import math
+import os
 
 noise_perc = 5
 noise_range = [-100, 100]
-input = "pendigits_full_with_head.csv"
+input = sys.argv[0]
 output = input.replace(".csv", "_noise" + str(noise_perc) + ".csv")
 
 # Find input csv shape
