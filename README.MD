@@ -9,7 +9,7 @@ Copy & run ```mongo-importer.bat``` in the same folder of CSV datasets you want 
 ## Cleaning
 TODO
 
-## Manipulating
+## Manipulation
 ### ```add_noise.py``` (WIP)
 Adds random points to data
 
