@@ -15,6 +15,9 @@ Adds random points to data
 
 ## Tuning
 
+
+
+
 ### ```hyperopt_tuner.py```
 This script uses hyperopt library to explore sklearn classifiers and the related hyperparameters. Two functions:
  - ```tune(X_train, X_test, y_train, y_test)```, computes and print the best classifier and the related accuracy given the selected input (X_train, X_test) and related labels (y_train, y_test)
