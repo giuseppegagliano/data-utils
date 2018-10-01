@@ -13,10 +13,7 @@ TODO
 ### ```add_noise.py``` (WIP)
 Adds random points to data
 
-## Tuning
-
-
-
+## Tunings
 
 ### ```hyperopt_tuner.py```
 This script uses hyperopt library to explore sklearn classifiers and the related hyperparameters. Two functions:
